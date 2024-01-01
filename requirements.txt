@@ -3,5 +3,6 @@ pandas==2.0.3
 streamlit
 scikit-learn==1.2.2
 pip==23.2.1
-matplotlib
-seaborn
+matplotlib==3.8.2
+seaborn== 0.12.2
+yellowbrick==1.5

@@ -71,7 +71,7 @@ if show_elbow:
    Elbow_M = KElbowVisualizer(KMeans(), k=10)
    Elbow_M.fit(sub_df)
    Elbow_M.show()
-   st.set_option('deprecation.showPyplotGlobalUse', False)
+   # st.set_option('deprecation.showPyplotGlobalUse', False)
    elbo_plot = st.sidebar.pyplot()
 
 def k_means(n_clust):

@@ -21,9 +21,7 @@
 ## Domain Proyek
 
 
-Dalam proyek ini, kita akan mengeksplorasi dataset pelanggan kartu kredit dan menggunakan metode pengelompokan untuk mengelompokkan pelanggan berdasarkan karakteristik mereka, Dengan menggunakan kecanggihan algoritma pengelompokan, 
-proyek ini bertujuan untuk mengungkap wawasan yang dapat membantu perusahaan kartu kredit memahami lebih baik 
-pelanggan mereka dan merancang strategi efektif untuk mempertahankan para nasabahnya. So, Let's dive in !
+Dalam proyek ini, kita akan mengeksplorasi dataset nasabah kartu kredit dan menggunakan metode pengelompokan untuk mengelompokkan nasabah berdasarkan karakteristik mereka, Dengan menggunakan kecanggihan algoritma pengelompokan, proyek ini bertujuan untuk mengungkap wawasan yang dapat membantu perusahaan kartu kredit memahami lebih baik nasabah mereka dan merancang strategi efektif untuk mempertahankan para nasabahnya. So, Let's dive in !
 
 ## Business Understanding
 
@@ -81,8 +79,8 @@ Berikut informasi pada dataset:
 19. **Total_Trans_Ct:** Total Jumlah Transaksi. [int64] <br>
 20. **Total_Ct_Chng_Q4_Q1:** Jumlah total berubah dari kuartal 4 ke kuartal 1. [float64] <br>
 21. **Avg_Utilization_Ratio:** Rasio pemanfaatan rata-rata nasabah. [float64] <br>
-22. **Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_1:** Pengklasifikasi Naive Bayes untuk memprediksi apakah seseorang akan churn atau tidak berdasarkan karakteristik seperti itu.1 [float64] <br>
-23. **Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_2:**  Pengklasifikasi Naive Bayes untuk memprediksi apakah seseorang akan churn atau tidak berdasarkan karakteristik seperti itu.2 [float64] <br>
+22. **Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_1:** Pengklasifikasi Naive Bayes untuk memprediksi apakah seseorang akan churn atau tidak berdasarkan karakteristik seperti yang ada.1 [float64] <br>
+23. **Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_2:**  Pengklasifikasi Naive Bayes untuk memprediksi apakah seseorang akan churn atau tidak berdasarkan karakteristik seperti yang ada.2 [float64] <br>
 
 ## Data Discovery
 Berikut merupakan tahapan dari Data Discovery yang saya lakukan: 
@@ -163,68 +161,68 @@ Proses EDA dilakukan dengan menganalisis dataset untuk mendapatkan pemahaman yan
 Tahapan EDA yang saya lakukan antara lain:
 
 Menampilkan countplot untuk melihat distribusi kategori pada kolom 'Attrition_Flag' dalam DataFrame (df)
-``
+```
 sns.countplot(x='Attrition_Flag',data=df,palette='Blues')
 plt.title('Distribusi Attrion Flag');
-``
+```
 ![](./Assets/eda1.png)
 
 Menampilkan catplot untuk melihat visualisasi tentang bagaimana distribusi jumlah observasi berdasarkan jenis kelamin ('Gender') dalam setiap kelompok status perkawinan ('Marital_Status').
-``
+```
 sns.catplot(x='Gender',data=df,palette='Blues',kind='count',col='Marital_Status');
-``
+```
 ![](./Assets/eda2.png)
 
 Menampilkan countplot untuk menunjukkan visualisasi tentang bagaimana distribusi jumlah observasi untuk setiap kategori 'Income_Category', dengan perbedaan warna yang memperlihatkan bagaimana distribusi ini berkaitan dengan kolom 'Attrition_Flag'.
 
-``
+```
 plt.figure(figsize=(10,5))
 sns.countplot(x='Income_Category',data=df,palette='Blues',hue='Attrition_Flag');
-``
+```
 ![](./Assets/eda3.png)
 
 Menampilkan histogram  yang memberikan gambaran tentang distribusi usia pelanggan.
-``
+```
 plt.figure(figsize=(6, 4))
 sns.histplot(df['Customer_Age'], bins=20, kde=True, color='skyblue')
 plt.title('Distribusi Usia Pelanggan')
 plt.xlabel('Customer Age')
 plt.ylabel('Frequency')
 plt.show()
-``
+```
 ![](./Assets/eda4.png)
 
 Histogram ini menunjukkan distribusi jumlah bulan (Months_on_book) yang pelanggan telah menjadi nasabah (on book).
-``
+```
 plt.figure(figsize=(10, 6))
 sns.histplot(df['Months_on_book'], bins=20, kde=True, color='salmon')
 plt.title('Distribusi Months on Book')
 plt.xlabel('Months on Book')
 plt.ylabel('Frequency')
 plt.show()
-``
+```
 ![](./Assets/eda5.png)
 
 Menampilkan countplot untuk menunjukan distribusi kategori kartu.
-``
+```
 plt.figure(figsize=(8, 6))
 sns.countplot(x='Card_Category', data=df, palette='pastel')
 plt.title('Distribusi Kategori Kartu Pelanggan')
 plt.xlabel('Card Category')
 plt.ylabel('Count')
 plt.show()
-``
+```
 ![](./Assets/eda6.png)
 
 Menampilkan countplot untuk menunjukan distribusi limit credit.
-``
+```
 plt.figure(figsize=(8, 6))
 sns.histplot(df['Credit_Limit'], color='salmon')
 plt.title('Distribusi Limit Credit')
 plt.xlabel('Credit Limit')
 plt.ylabel('Count')
 plt.show()
-``
+```
 ![](./Assets/eda7.png)
 
 
@@ -248,10 +246,10 @@ sns.heatmap(correlation,vmin=None,
 Untuk tahap Data Preparation, Tahap awal yang saya lakukan adalah sebagai berikut:
 
 **Menghapus kolom yang tidak dibutuhkan.**
-``
+```
 df = df.drop(['CLIENTNUM','Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_1',
 'Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_2'], axis=1)
-``
+```
 
 **Memisahkan kolom yang bertype numerical dan categorical.**
 ```
@@ -286,51 +284,51 @@ K-Means Clustering adalah sebuah algoritma dalam machine learning yang digunakan
 Tahap awal yang saya lakukan adalah sebagai berikut: <br>
 
 Membuat DataFrame yang berfokus pada sejumlah kolom tertentu yang relevan:
-``
+```
 sub_df = df[['Customer_Age', 'Dependent_count', 'Education_Level',
             'Marital_Status', 'Income_Category', 'Months_on_book',
             'Total_Relationship_Count', 'Months_Inactive_12_mon', 'Contacts_Count_12_mon',
             'Credit_Limit', 'Total_Trans_Amt', 'Total_Trans_Ct']]
 
-``
+```
 
 **Penskalaan Data**
-``
+```
 scaler = StandardScaler()
 scaler.fit(sub_df)
 scaled_sub_df = pd.DataFrame(scaler.transform(sub_df),columns= sub_df.columns )
 
 scaled_sub_df.head()
-``
+```
 dengan menggunakan fungsi StandardScaler, dilakukan penskalaan data dalam dataframe. Proses ini penting sehingga setiap fitur memiliki skala yang serupa atau setara.
 
 **Menggunakan Metode Elbow untuk mencari nilai cluster terbaik**
 
-``
+```
 Elbow_M = KElbowVisualizer(KMeans(), k=10)
 Elbow_M.fit(sub_df)
 Elbow_M.show()
-``
+```
 ![](./Assets/elbow.png)
 
-Menggunakan cluster 5 untuk memproses model dan menghitung silhouette score
+**Menggunakan cluster 5 untuk memproses model dan menghitung silhouette score**
 
-``
+```
 kmeans = KMeans(n_clusters=5, init='k-means++', max_iter=500, n_init=10, random_state=0)
 y_kmeans = kmeans.fit_predict(sub_df)
 silhouette_avg = silhouette_score(sub_df, y_kmeans)
 print(f"Silhouette Score: {silhouette_avg}")
-``
+```
 
-Menambahkan kolom Cluster pada sub_df
-``
+**Menambahkan kolom Cluster pada sub_df**
+```
 df['Cluster'] = y_kmeans
-``
+```
 
-Menghitung jumlah setiap cluster
-``
+**Menghitung jumlah setiap cluster**
+```
 df.Cluster.value_counts()
-``
+```
 ![](./Assets/clust.png)
 
 **Visualisasi Hasil Modelling**
@@ -363,7 +361,7 @@ Kode tersebut menunjukan hasil sebagai berikut:
 
 ## Deployment
 
-![](./Assets/fetal-app.png)
+![](./Assets/card-app.png)
 
 [](https://fetal-health-app-nita27.streamlit.app/)
 

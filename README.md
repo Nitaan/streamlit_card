@@ -361,8 +361,8 @@ Kode tersebut menunjukan hasil sebagai berikut:
 
 ## Deployment
 
-![](./Assets/clust.app.png)
+![](./Assets/clustapp.png)
 
-[](https://clust-credit.streamlit.app/)
+[App Clustering CC](https://clust-credit.streamlit.app/)
 
 

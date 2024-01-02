@@ -59,9 +59,6 @@ st.sidebar.subheader("Nilai Jumlah K")
 clust = st.sidebar.slider("Pilih Jumlah Cluster :", 2, 10, 3, 1)
 
 st.sidebar.subheader("Elbow: ")
-show_elbow = st.sidebar.checkbox("Hitung elbow? ")
-if show_elbow:
-   
    Elbow_M = KElbowVisualizer(KMeans(), k=10)
    Elbow_M.fit(sub_df)
    Elbow_M.show()

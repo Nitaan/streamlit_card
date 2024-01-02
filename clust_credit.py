@@ -113,5 +113,4 @@ def k_means(n_clust):
    
    st.header('Data Setelah Clustering')
    st.write(sub_df)
-
 k_means(clust)

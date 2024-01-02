@@ -59,11 +59,11 @@ st.sidebar.subheader("Nilai Jumlah K")
 clust = st.sidebar.slider("Pilih Jumlah Cluster :", 2, 10, 3, 1)
 
 st.sidebar.subheader("Elbow: ")
-   Elbow_M = KElbowVisualizer(KMeans(), k=10)
-   Elbow_M.fit(sub_df)
-   Elbow_M.show()
-   st.set_option('deprecation.showPyplotGlobalUse', False)
-   elbo_plot = st.sidebar.pyplot()
+Elbow_M = KElbowVisualizer(KMeans(), k=10)
+Elbow_M.fit(sub_df)
+Elbow_M.show()
+st.set_option('deprecation.showPyplotGlobalUse', False)
+elbo_plot = st.sidebar.pyplot()
 
 def k_means(n_clust):
     kmeans = KMeans(n_clusters=n_clust, max_iter=500, n_init=10, random_state=0)

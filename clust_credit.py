@@ -75,8 +75,9 @@ if show_elbow:
    elbo_plot = st.sidebar.pyplot()
 
 def k_means(n_clust):
-   kmeans = KMeans(n_clusters=n_clust).fit(sub_df)
-   sub_df['Cluster'] = kmeans.labels_
+   kmeans = KMeans(n_clusters=n_clust)
+   y_kmeans = kmeans.fit_predict(sub_df)
+   sub_df['Cluster'] = y_kmeans
    st.header('Cluster Plot') 
    st.set_option('deprecation.showPyplotGlobalUse', False)
 

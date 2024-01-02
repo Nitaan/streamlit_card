@@ -73,7 +73,6 @@ def k_means(n_clust):
 
     st.header('Cluster Plot') 
     st.set_option('deprecation.showPyplotGlobalUse', False)
-
     plt.figure(figsize=(10, 6))
     sns.scatterplot(data=sub_df_copy, x='Total_Trans_Amt', y='Total_Trans_Ct', hue='Cluster', palette='viridis', s=50)
     plt.title('Scatter Plot of Total_Trans_Amt vs. Total_Trans_Ct')
@@ -81,6 +80,7 @@ def k_means(n_clust):
     plt.ylabel('Total Transaction Count')
     st.pyplot()
 
+    st.set_option('deprecation.showPyplotGlobalUse', False)
     plt.figure(figsize=(10, 6))
     sns.scatterplot(data=sub_df_copy, x='Months_on_book', y='Total_Trans_Amt', hue='Cluster', palette='viridis', s=50)
     plt.title('Scatter Plot of Months_on_book vs. Total_Trans_Amt')
@@ -88,13 +88,15 @@ def k_means(n_clust):
     plt.ylabel('Total_Trans_Amt')
     st.pyplot()
     
+    st.set_option('deprecation.showPyplotGlobalUse', False)
     plt.figure(figsize=(10, 6))
     sns.scatterplot(x='Total_Trans_Amt', y='Contacts_Count_12_mon', data=sub_df_copy, hue='Cluster', palette='viridis', s=50)
     plt.title('Scatter Plot of Total_Trans_Amt vs. Contacts_Count_12_month')
     plt.xlabel('Total Transaction Amount')
     plt.ylabel('Contacts Count (12 Months)')
     st.pyplot()
-
+    
+    st.set_option('deprecation.showPyplotGlobalUse', False)
     plt.figure(figsize=(10, 6))
     sns.scatterplot(x='Customer_Age', y='Credit_Limit', data=sub_df_copy, hue='Cluster', palette='viridis', s=50)
     plt.title('Scatter Plot of Customer_Age vs. Credit_Limit')

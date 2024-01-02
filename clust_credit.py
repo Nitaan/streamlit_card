@@ -81,7 +81,6 @@ def k_means(n_clust):
    st.header('Cluster Plot') 
    st.set_option('deprecation.showPyplotGlobalUse', False)
 
-
    plt.figure(figsize=(10, 6))
    sns.scatterplot(data=sub_df, x='Total_Trans_Amt', y='Total_Trans_Ct', hue='Cluster', palette='viridis', s=50)
    plt.title('Scatter Plot of Total_Trans_Amt vs. Total_Trans_Ct')
@@ -94,7 +93,6 @@ def k_means(n_clust):
    plt.title('Scatter Plot of Months_on_book vs. Total_Trans_Amt')
    plt.xlabel('Months_on_book')
    plt.ylabel('Total_Trans_Amt')
-
    st.pyplot()
    
    plt.figure(figsize=(10, 6))

@@ -361,8 +361,8 @@ Kode tersebut menunjukan hasil sebagai berikut:
 
 ## Deployment
 
-![](./Assets/card-app.png)
+![](./Assets/clust.app.png)
 
-[](https://fetal-health-app-nita27.streamlit.app/)
+[](https://clust-credit.streamlit.app/)
 
 

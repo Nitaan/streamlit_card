@@ -8,8 +8,8 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from yellowbrick.cluster import KElbowVisualizer
-from yellowbrick.cluster import SilhouetteVisualizer
-from sklearn.metrics import silhouette_score
+import warnings
+warnings.filterwarnings("ignore")
 
 st.title('Aplikasi Clustering Nasabah Kartu Kredit')
 

@@ -3,11 +3,11 @@ import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt
 import seaborn as sns
-import matplotlib.cm as cm
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from yellowbrick.cluster import KElbowVisualizer
+from matplotlib import font_manager
 import warnings
 warnings.filterwarnings("ignore")
 

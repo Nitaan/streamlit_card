@@ -7,7 +7,6 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from yellowbrick.cluster import KElbowVisualizer
-from matplotlib import font_manager
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -53,21 +52,15 @@ sub_df = df[['Customer_Age', 'Dependent_count', 'Education_Level',
 
 scaler = StandardScaler()
 scaler.fit(sub_df)
-scaled_sub_df = pd.DataFrame(scaler.transform(sub_df),columns= sub_df.columns )
-
-wcss=[]
-for i in range (1,11):
-  model = KMeans(n_clusters=i, init='k-means++', n_init=10, max_iter=1000, random_state=42)
-  model.fit(sub_df)
-  wcss.append(model.inertia_)
-
+scaled_sub_df = pd.DataFrame(scaler.transform(sub_df), columns=sub_df.columns)
 
 st.sidebar.subheader("Nilai Jumlah K")
-clust = st.sidebar.slider("Pilih Jumlah Cluster :", 2,10,3,1)
+clust = st.sidebar.slider("Pilih Jumlah Cluster :", 2, 10, 3, 1)
 
 st.sidebar.subheader("Elbow: ")
 show_elbow = st.sidebar.checkbox("Hitung elbow? ")
 if show_elbow:
+   
    Elbow_M = KElbowVisualizer(KMeans(), k=10)
    Elbow_M.fit(sub_df)
    Elbow_M.show()
@@ -75,41 +68,43 @@ if show_elbow:
    elbo_plot = st.sidebar.pyplot()
 
 def k_means(n_clust):
-   kmeans = KMeans(n_clusters=n_clust)
-   y_kmeans = kmeans.fit_predict(sub_df)
-   sub_df['Cluster'] = y_kmeans
-   st.header('Cluster Plot') 
-   st.set_option('deprecation.showPyplotGlobalUse', False)
+    kmeans = KMeans(n_clusters=n_clust, max_iter=500, n_init=10, random_state=0)
+    y_kmeans = kmeans.fit_predict(sub_df)
+    sub_df_copy = sub_df.copy()
+    sub_df_copy.loc[:, 'Cluster'] = y_kmeans.copy()
 
-   plt.figure(figsize=(10, 6))
-   sns.scatterplot(data=sub_df, x='Total_Trans_Amt', y='Total_Trans_Ct', hue='Cluster', palette='viridis', s=50)
-   plt.title('Scatter Plot of Total_Trans_Amt vs. Total_Trans_Ct')
-   plt.xlabel('Total Transaction Amount')
-   plt.ylabel('Total Transaction Count')
-   st.pyplot()
+    st.header('Cluster Plot') 
+    st.set_option('deprecation.showPyplotGlobalUse', False)
 
-   plt.figure(figsize=(10, 6))
-   sns.scatterplot(data=sub_df, x='Months_on_book', y='Total_Trans_Amt', hue='Cluster', palette='viridis', s=50)
-   plt.title('Scatter Plot of Months_on_book vs. Total_Trans_Amt')
-   plt.xlabel('Months_on_book')
-   plt.ylabel('Total_Trans_Amt')
-   st.pyplot()
-   
-   plt.figure(figsize=(10, 6))
-   sns.scatterplot(x='Total_Trans_Amt', y='Contacts_Count_12_mon', data=sub_df, hue='Cluster', palette='viridis', s=50)
-   plt.title('Scatter Plot of Total_Trans_Amt vs. Contacts_Count_12_mont')
-   plt.xlabel('Total Transaction Amount')
-   plt.ylabel('Contacts Count (12 Months)')
-   st.pyplot()
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(data=sub_df_copy, x='Total_Trans_Amt', y='Total_Trans_Ct', hue='Cluster', palette='viridis', s=50)
+    plt.title('Scatter Plot of Total_Trans_Amt vs. Total_Trans_Ct')
+    plt.xlabel('Total Transaction Amount')
+    plt.ylabel('Total Transaction Count')
+    st.pyplot()
 
-   plt.figure(figsize=(10, 6))
-   sns.scatterplot(x='Customer_Age', y='Credit_Limit', data=sub_df, hue='Cluster', palette='viridis', s=50)
-   plt.title('Scatter Plot of Customer_Age vs. Credit_Limit')
-   plt.xlabel('Customer Age')
-   plt.ylabel('Credit Limit')
-   st.pyplot()
-   
-   st.header('Data Setelah Clustering')
-   st.write(sub_df)
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(data=sub_df_copy, x='Months_on_book', y='Total_Trans_Amt', hue='Cluster', palette='viridis', s=50)
+    plt.title('Scatter Plot of Months_on_book vs. Total_Trans_Amt')
+    plt.xlabel('Months_on_book')
+    plt.ylabel('Total_Trans_Amt')
+    st.pyplot()
     
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(x='Total_Trans_Amt', y='Contacts_Count_12_mon', data=sub_df_copy, hue='Cluster', palette='viridis', s=50)
+    plt.title('Scatter Plot of Total_Trans_Amt vs. Contacts_Count_12_month')
+    plt.xlabel('Total Transaction Amount')
+    plt.ylabel('Contacts Count (12 Months)')
+    st.pyplot()
+
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(x='Customer_Age', y='Credit_Limit', data=sub_df_copy, hue='Cluster', palette='viridis', s=50)
+    plt.title('Scatter Plot of Customer_Age vs. Credit_Limit')
+    plt.xlabel('Customer Age')
+    plt.ylabel('Credit Limit')
+    st.pyplot()
+   
+    st.header('Data Setelah Clustering')
+    st.write(sub_df_copy)
+
 k_means(clust)

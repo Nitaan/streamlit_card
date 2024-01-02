@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt
+import matplotlib.font_manager
 import seaborn as sns
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import LabelEncoder
@@ -9,12 +10,6 @@ from sklearn.preprocessing import StandardScaler
 from yellowbrick.cluster import KElbowVisualizer
 import warnings
 warnings.filterwarnings("ignore")
-from matplotlib import rcParams
-
-font_name = "Arial"
-
-rcParams['font.family'] = 'sans-serif'
-rcParams['font.sans-serif'] = [font_name]
 
 
 st.title('Aplikasi Clustering Nasabah Kartu Kredit')

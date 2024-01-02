@@ -9,6 +9,13 @@ from sklearn.preprocessing import StandardScaler
 from yellowbrick.cluster import KElbowVisualizer
 import warnings
 warnings.filterwarnings("ignore")
+from matplotlib import rcParams
+
+font_name = "Arial"
+
+rcParams['font.family'] = 'sans-serif'
+rcParams['font.sans-serif'] = [font_name]
+
 
 st.title('Aplikasi Clustering Nasabah Kartu Kredit')
 

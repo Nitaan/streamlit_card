@@ -100,7 +100,6 @@ def k_means(n_clust):
    plt.title('Scatter Plot of Total_Trans_Amt vs. Contacts_Count_12_mont')
    plt.xlabel('Total Transaction Amount')
    plt.ylabel('Contacts Count (12 Months)')
-   plt.legend(title='Cluster')
    st.pyplot()
 
    plt.figure(figsize=(10, 6))
@@ -108,9 +107,9 @@ def k_means(n_clust):
    plt.title('Scatter Plot of Customer_Age vs. Credit_Limit')
    plt.xlabel('Customer Age')
    plt.ylabel('Credit Limit')
-   plt.legend(title='Cluster')
    st.pyplot()
    
    st.header('Data Setelah Clustering')
    st.write(sub_df)
+    
 k_means(clust)
